@@ -1,6 +1,6 @@
 .section {
-    margin-top: calc($separacion / 2);
-    margin-bottom: calc($separacion / 2);
+    margin-top: calc($gap / 2);
+    margin-bottom: calc($gap / 2);
 }
 .centered-content {
     max-width: 800px;

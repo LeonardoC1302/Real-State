@@ -6,15 +6,15 @@ html {
     box-sizing: inherit;
 }
 body {
-    font-family: $fuente_principal;
+    font-family: $primary-font;
     font-size: 1.6rem;
     line-height: 1.8;
 }
 p {
-    color: $negro;
+    color: $black;
     font-size: 2rem;
 }
-.contenedor {
+.container {
     width: 95%;
     max-width: 120rem;
     margin: 0 auto;
@@ -31,8 +31,8 @@ picture {
 }
 
 h1, h2, h3 {
-    font-family: $fuente_principal;
-    margin: calc($separacion / 2) 0;
+    font-family: $primary-font;
+    margin: calc($gap / 2) 0;
     font-weight: 300;
     text-align: center;
     
