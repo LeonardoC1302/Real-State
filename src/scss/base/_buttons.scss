@@ -1,4 +1,8 @@
 .yellow-button {
+    @include button($yellow, $white, $bold, 1rem 3rem, inline-block);
+}
+
+.yellow-button-block {
     @include button($yellow, $white, $bold, 1rem 3rem, block);
 }
 
