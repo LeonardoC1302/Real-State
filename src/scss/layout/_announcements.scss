@@ -1,0 +1,37 @@
+@include tablet {
+    .container-announcements {
+        @include grid(3, 2rem)
+    }
+}
+
+.announcement {
+    background-color: lighten($gray, 5);
+    border: 1px solid darken($gray,10);
+    .announcement-content {
+        padding: 2rem;
+    }
+    h3, p {
+        margin: 0;
+    }
+    .price {
+        color: $green;
+        font-weight: $bold;
+        font-size: 3rem;
+    }
+}
+.icons-stats {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    li {
+        flex: 1;
+        display: flex;
+        img {
+            flex: 0 0 5rem;
+            margin-right: 1rem;
+        }
+        p {
+            font-weight: $black;
+        }
+    }
+}
