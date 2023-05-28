@@ -13,16 +13,19 @@
     h3, p {
         margin: 0;
     }
-    .price {
-        color: $green;
-        font-weight: $bold;
-        font-size: 3rem;
-    }
 }
+
+.price {
+    color: $green;
+    font-weight: $bold;
+    font-size: 3rem;
+}
+
 .icons-stats {
     display: flex;
     list-style: none;
     padding: 0;
+    max-width: 40rem;
     li {
         flex: 1;
         display: flex;

@@ -17,6 +17,11 @@
         margin-bottom: 0;
     }
 }
+.info-meta {
+    span {
+        color:$yellow;
+    }
+}
 
 .entry-text {
     a {
@@ -39,8 +44,5 @@
             background-color: $green;
             margin-top: 1rem;
         }
-    }
-    span {
-        color:$yellow;
     }
 }
