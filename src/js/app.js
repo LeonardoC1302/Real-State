@@ -16,6 +16,21 @@ function responsiveMenu() {
 
 // Dark Mode
 function darkMode() {
+    const preference = window.matchMedia('(prefers-color-scheme: dark)');
+    if (preference.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    // Read if the user changes the theme
+    preference.addEventListener('change', () => {
+        if (preference.matches) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+
     const darkMode = document.querySelector('.dark-mode-button');
 
     darkMode.addEventListener('click', () => {
