@@ -1,6 +1,7 @@
 .bar {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-top: 3rem;
     @include tablet {
         flex-direction: row;
@@ -9,9 +10,14 @@
 }
 
 .navigation {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease-in-out, opacity 0.5s linear;
     @include tablet {
         display: flex;
         align-items: center;
+        opacity: 1;
+        visibility: visible;
     }
     a {
         color: $white;
@@ -27,4 +33,19 @@
             }
         }
     }
+}
+
+.mobile-menu {
+    @include tablet{
+        display: none;
+    }
+    img {
+        width: 5rem;
+
+    }
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
 }
