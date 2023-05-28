@@ -7,11 +7,18 @@
 .announcement {
     background-color: lighten($gray, 5);
     border: 1px solid darken($gray,10);
+    margin-bottom: 2rem;
+    @include tablet {
+        margin-bottom: 0;
+    }
     .announcement-content {
         padding: 2rem;
     }
     h3, p {
         margin: 0;
+    }
+    &:last-of-type {
+        margin-bottom: 0;
     }
 }
 

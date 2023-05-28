@@ -5,6 +5,13 @@
     .footer-content {
         padding-top: calc($gap / 2);
     }
+
+    .navigation {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+    }
+
     .copyright {
         color: $white;
         text-align: center;
