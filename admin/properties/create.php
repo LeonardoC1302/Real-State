@@ -18,14 +18,18 @@
 
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $title = $_POST['title'];
-        $price = $_POST['price'];
-        $description = $_POST['description'];
-        $rooms = $_POST['rooms'];
-        $wc = $_POST['wc'];
-        $parking = $_POST['parking'];
-        $seller_id = $_POST['seller'];
+        // Sanitize inputs
+        $title = mysqli_real_escape_string($db, $_POST['title']);
+        $price = mysqli_real_escape_string($db, $_POST['price']);
+        $description = mysqli_real_escape_string($db, $_POST['description']);
+        $rooms = mysqli_real_escape_string($db, $_POST['rooms']);
+        $wc = mysqli_real_escape_string($db, $_POST['wc']);
+        $parking = mysqli_real_escape_string($db, $_POST['parking']);
+        $seller_id = mysqli_real_escape_string($db, $_POST['seller']);
         $created = date('Y/m/d');
+
+        // Files
+        $image = $_FILES['image'];
 
         if(!$title) {
             $errors[] = "The title is mandatory";
@@ -49,10 +53,30 @@
             $errors[] = "The seller is mandatory";
         }
 
+        // Image validation
+        if(!$image['name']){
+            $errors[] = "The image is mandatory";
+        }
+        // Validate image size (100Kb max)
+        $maxSize = 1000 * 100;
+        if($image['size'] > $maxSize) {
+            $errors[] = "The image is too large. Max size: 100Kb";
+        }
+
         // Insert if there are no errors
         if(empty($errors)){
+            // Create folder
+            $imageDirectory = '../../images/';
+            if(!is_dir($imageDirectory)) {
+                mkdir($imageDirectory);
+            }
+            // Generate a unique name
+            $imageName = md5(uniqid(rand(), true)) . '.jpg';
+            // Upload image
+            move_uploaded_file($image['tmp_name'], $imageDirectory . $imageName);
+
             // Insert
-            $query = "INSERT INTO properties (title, price, description, rooms, wc, parking, created, seller_id) VALUES ('$title', '$price', '$description', '$rooms', '$wc', '$parking', '$created', '$seller_id')";
+            $query = "INSERT INTO properties (title, price, description, rooms, wc, parking, created, seller_id, image) VALUES ('$title', '$price', '$description', '$rooms', '$wc', '$parking', '$created', '$seller_id', '$imageName')";
             $result = mysqli_query($db, $query);
 
             if($result) {
@@ -77,7 +101,7 @@
             </div>
         <?php endforeach; ?>
 
-        <form class="form" method="POST" action="/admin/properties/create.php">
+        <form class="form" method="POST" action="/admin/properties/create.php" enctype="multipart/form-data">
             <fieldset>
                 <legend>General Information</legend>
                 <label for="title">Title:</label>
@@ -90,7 +114,7 @@
                 <input type="file" id="image" name="image" accept="image/jpeg, image/png">
 
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" value="<?php echo $description ?>"></textarea>
+                <textarea id="description" name="description"><?php echo $description ?></textarea>
             </fieldset>
 
             <fieldset>
