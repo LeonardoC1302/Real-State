@@ -51,7 +51,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a class="yellow-button-block" href="announcement.html">See Property</a>
+                    <a class="yellow-button-block" href="announcement.php">See Property</a>
                 </div> <!-- .announcement-content -->
             </div> <!-- .announcement -->
 
@@ -79,7 +79,7 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a class="yellow-button-block" href="announcement.html">See Property</a>
+                    <a class="yellow-button-block" href="announcement.php">See Property</a>
                 </div> <!-- .announcement-content -->
             </div> <!-- .announcement -->
 
@@ -107,19 +107,19 @@
                             <p>4</p>
                         </li>
                     </ul>
-                    <a class="yellow-button-block" href="announcement.html">See Property</a>
+                    <a class="yellow-button-block" href="announcement.php">See Property</a>
                 </div> <!-- .announcement-content -->
             </div> <!-- .announcement -->
         </div> <!-- .container-announcements -->
         <div class="align-right">
-            <a href="announcements.html" class="green-button">See All Properties</a>
+            <a href="announcements.php" class="green-button">See All Properties</a>
         </div>
     </section>
 
     <section class="img-contact">
         <h2>Find the house of your dreams</h2>
         <p>Fill the contact form and an advisor will contact you shortly</p>
-        <a href="contact.html" class="yellow-button">Contact Us</a>
+        <a href="contact.php" class="yellow-button">Contact Us</a>
     </section>
 
     <div class="container section inferior-section">
@@ -134,7 +134,7 @@
                     </picture>
                 </div>
                 <div class="entry-text">
-                    <a href="entry.html">
+                    <a href="entry.php">
                         <h4>Terrace on the roof of your house</h4>
                         <p class="info-meta">Written on: <span>10/20/2022</span> by <span>admin</span></p>
                         <p>Advices for building a terrace on the roof of your house with the best materials and saving money</p>
@@ -150,7 +150,7 @@
                     </picture>
                 </div>
                 <div class="entry-text">
-                    <a href="entry.html">
+                    <a href="entry.php">
                         <h4>Guide for decorating your home</h4>
                         <p class="info-meta">Written on: <span>10/20/2022</span> by <span>admin</span></p>
                         <p>Maximize the space on your home with with guide, learn to combine furniture and colors to bring life to your home</p>

@@ -31,7 +31,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
     
@@ -59,7 +59,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
     
@@ -87,7 +87,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
 
@@ -115,7 +115,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
 
@@ -143,7 +143,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
 
@@ -171,7 +171,7 @@
                                 <p>4</p>
                             </li>
                         </ul>
-                        <a class="yellow-button-block" href="announcement.html">See Property</a>
+                        <a class="yellow-button-block" href="announcement.php">See Property</a>
                     </div> <!-- .announcement-content -->
                 </div> <!-- .announcement -->
             </div> <!-- .container-announcements -->

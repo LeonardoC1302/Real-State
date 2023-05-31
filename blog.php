@@ -15,7 +15,7 @@
                 </picture>
             </div>
             <div class="entry-text">
-                <a href="entry.html">
+                <a href="entry.php">
                     <h4>Terrace on the roof of your house</h4>
                     <p>Written on: <span>10/20/2022</span> by <span>admin</span></p>
                     <p>Advices for building a terrace on the roof of your house with the best materials and saving money</p>
@@ -31,7 +31,7 @@
                 </picture>
             </div>
             <div class="entry-text">
-                <a href="entry.html">
+                <a href="entry.php">
                     <h4>Guide for decorating your house</h4>
                     <p>Written on: <span>10/20/2022</span> by <span>admin</span></p>
                     <p>Maximize the space on your home with with guide, learn to combine furniture and colors to bring life to your home</p>
@@ -47,7 +47,7 @@
                 </picture>
             </div>
             <div class="entry-text">
-                <a href="entry.html">
+                <a href="entry.php">
                     <h4>Terrace on the roof of your house</h4>
                     <p>Written on: <span>10/20/2022</span> by <span>admin</span></p>
                     <p>Advices for building a terrace on the roof of your house with the best materials and saving money</p>
@@ -63,7 +63,7 @@
                 </picture>
             </div>
             <div class="entry-text">
-                <a href="entry.html">
+                <a href="entry.php">
                     <h4>Guide for decorating your house</h4>
                     <p>Written on: <span>10/20/2022</span> by <span>admin</span></p>
                     <p>Maximize the space on your home with with guide, learn to combine furniture and colors to bring life to your home</p>

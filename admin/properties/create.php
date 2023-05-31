@@ -57,8 +57,8 @@
         if(!$image['name']){
             $errors[] = "The image is mandatory";
         }
-        // Validate image size (100Kb max)
-        $maxSize = 1000 * 100;
+        // Validate image size (200Kb max)
+        $maxSize = 1000 * 200;
         if($image['size'] > $maxSize) {
             $errors[] = "The image is too large. Max size: 100Kb";
         }
@@ -81,7 +81,7 @@
 
             if($result) {
                 // Redirect to admin
-                header('Location: /admin');
+                header('Location: /admin?result=1');
             }
         }
     }
