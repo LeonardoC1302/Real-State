@@ -16,7 +16,9 @@
     <main class="container section">
         <h1>Real State Administrator</h1>
         <?php if($result == 1): ?>
-            <p class='alert success'>Announcement created successfully</p>
+            <p class='alert success'>Announcement Created Successfully</p>
+        <?php elseif($result == 2): ?>
+            <p class='alert success'>Announcement Updated Successfully</p>
         <?php endif;
         ?>
         <a href="/admin/properties/create.php" class="button green-button">New Property</a>
@@ -40,7 +42,7 @@
                     <td>$ <?php echo $property['price']; ?> </td>
                     <td>
                         <a href="#" class="red-button-block">Delete</a>
-                        <a href="#" class="yellow-button-block">Update</a>
+                        <a href="/admin/properties/update.php?id=<?php echo $property['id']; ?>" class="yellow-button-block">Update</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
@@ -53,6 +55,6 @@
 <?php
     // Close the connection
     mysqli_close($db);
-    
+
     includeTemplate('footer');
 ?>
