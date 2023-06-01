@@ -1,4 +1,9 @@
 <?php
+    require '../../includes/functions.php';
+    $auth = isAuth();
+    if(!$auth) {
+        header('Location: /');
+    }
     // Validate ID
     $id = $_GET['id'] ?? null;
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -104,7 +109,6 @@
         }
     }
 
-    require '../../includes/functions.php';
     includeTemplate('header');
 ?>
 

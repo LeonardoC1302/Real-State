@@ -1,4 +1,11 @@
 <?php
+    // Check if user is logged in
+    require '../includes/functions.php';
+    $auth = isAuth();
+    if(!$auth) {
+        header('Location: /');
+    }
+
     // Import the connection
     require '../includes/config/database.php';
     $db = connect_db();
@@ -29,7 +36,6 @@
         }
     }
 
-    require '../includes/functions.php';
     includeTemplate('header');
 ?>
 
