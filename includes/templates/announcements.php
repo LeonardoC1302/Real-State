@@ -1,5 +1,5 @@
 <?php
-    require __DIR__ . '/../config/database.php';
+    // require __DIR__ . '/../config/database.php';
     $db = connect_db();
     if($limit == null) {
         $query = "SELECT * FROM properties";

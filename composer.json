@@ -1,0 +1,17 @@
+{
+    "name": "leona/real-state",
+    "description": "Real State Project implementing OOP",
+    "type": "project",
+    "authors": [
+        {
+            "name": "LeonardoC1302",
+            "email": "lecespedes@estudiantec.cr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "./classes"
+        }
+    }
+}

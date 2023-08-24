@@ -1,5 +1,5 @@
 <?php
-require 'includes/config/database.php';
+require 'includes/config/app.php';
 $db = connect_db();
 
 // Create an user
