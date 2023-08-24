@@ -1,5 +1,5 @@
 <?php
-    require './includes/config/app.php';
+    require './includes/app.php';
     $db = connect_db();
 
     $errors = [];
