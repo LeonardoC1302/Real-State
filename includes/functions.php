@@ -10,9 +10,14 @@ function includeTemplate(string $name, bool $start=false){
 
 function isAuth(){
     session_start();
-    $auth = $_SESSION['login'] ?? false;
-    if($auth) {
-        return true;
+    if(!$_SESSION['login']) {
+        header('Location: /');
     }
-    return false;
+}
+
+function debug($var) {
+    echo '<pre>';
+    var_dump($var);
+    echo '</pre>';
+    exit;
 }

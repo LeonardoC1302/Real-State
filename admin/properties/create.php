@@ -1,11 +1,11 @@
 <?php
-    require '../../includes/functions.php';
-    $auth = isAuth();
-    if(!$auth) {
-        header('Location: /');
-    }
+    require '../../includes/app.php';
+    use App\Property;
 
-    require '../../includes/config/database.php';
+    isAuth();
+    
+
+    // require '../../includes/config/database.php';
     $db = connect_db();
 
     //Get sellers
@@ -24,6 +24,8 @@
 
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $property = new Property($_POST);
+        debug($property);
         // Sanitize inputs
         $title = mysqli_real_escape_string($db, $_POST['title']);
         $price = mysqli_real_escape_string($db, $_POST['price']);
@@ -136,7 +138,7 @@
 
             <fieldset>
                 <legend>Seller</legend>
-                <select name="seller">
+                <select name="seller_id">
                     <option value="" disabled selected>-- Select a Seller --</option>
                     <?php while( $seller = mysqli_fetch_assoc($result) ):?>
                         <option <?php echo $seller_id === $seller['id'] ? 'selected' : ''; ?> value="<?php echo $seller['id']; ?>"><?php echo $seller['name'] . " " . $seller['lastName']; ?> </option>
