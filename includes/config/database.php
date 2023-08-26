@@ -1,6 +1,6 @@
 <?php
 function connect_db() : mysqli {
-    $db = mysqli_connect('localhost', 'root', '123', 'realstate_crud');
+    $db = new mysqli('localhost', 'root', '123', 'realstate_crud');
     if(!$db) {
         echo "Error connecting to database";
         exit;

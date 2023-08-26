@@ -1,11 +1,9 @@
 <?php
     require '../../includes/app.php';
     use App\Property;
+    use Intervention\Image\ImageManagerStatic as Image;
 
     isAuth();
-    
-
-    // require '../../includes/config/database.php';
     $db = connect_db();
 
     //Get sellers
@@ -13,7 +11,7 @@
     $result = mysqli_query($db, $query);
 
     // Form Validation
-    $errors = [];
+    $errors = Property::getErrors();
     $title = '';
     $price = '';
     $description = '';
@@ -25,68 +23,25 @@
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $property = new Property($_POST);
-        debug($property);
-        // Sanitize inputs
-        $title = mysqli_real_escape_string($db, $_POST['title']);
-        $price = mysqli_real_escape_string($db, $_POST['price']);
-        $description = mysqli_real_escape_string($db, $_POST['description']);
-        $rooms = mysqli_real_escape_string($db, $_POST['rooms']);
-        $wc = mysqli_real_escape_string($db, $_POST['wc']);
-        $parking = mysqli_real_escape_string($db, $_POST['parking']);
-        $seller_id = mysqli_real_escape_string($db, $_POST['seller']);
-        $created = date('Y/m/d');
-
-        // Files
-        $image = $_FILES['image'];
-
-        if(!$title) {
-            $errors[] = "The title is mandatory";
-        }
-        if(!$price) {
-            $errors[] = "The price is mandatory";
-        }
-        if(strlen($description) < 25) {
-            $errors[] = "The description is mandatory and must be at least 25 characters";
-        }
-        if(!$rooms) {
-            $errors[] = "The room quantity is mandatory";
-        }
-        if(!$wc) {
-            $errors[] = "The bathroom quantity is mandatory";
-        }
-        if(!$parking) {
-            $errors[] = "The parking quantity is mandatory";
-        }
-        if(!$seller_id) {
-            $errors[] = "The seller is mandatory";
+        // Generate a unique name
+        $imageName = md5(uniqid(rand(), true)) . '.jpg';
+        // Resize image
+        if($_FILES['image']['tmp_name']){
+            $image = Image::make($_FILES['image']['tmp_name'])->fit(800, 600);
+            $property->setImage($imageName);
         }
 
-        // Image validation
-        if(!$image['name']){
-            $errors[] = "The image is mandatory";
-        }
-        // Validate image size (200Kb max)
-        $maxSize = 1000 * 200;
-        if($image['size'] > $maxSize) {
-            $errors[] = "The image is too large. Max size: 100Kb";
-        }
-
+        $errors = $property->validate();
+        
         // Insert if there are no errors
         if(empty($errors)){
+            // Save image
             // Create folder
-            $imageDirectory = '../../images/';
-            if(!is_dir($imageDirectory)) {
-                mkdir($imageDirectory);
+            if(!is_dir(IMAGES_DIR)) {
+                mkdir(IMAGES_DIR);
             }
-            // Generate a unique name
-            $imageName = md5(uniqid(rand(), true)) . '.jpg';
-            // Upload image
-            move_uploaded_file($image['tmp_name'], $imageDirectory . $imageName);
-
-            // Insert
-            $query = "INSERT INTO properties (title, price, description, rooms, wc, parking, created, seller_id, image) VALUES ('$title', '$price', '$description', '$rooms', '$wc', '$parking', '$created', '$seller_id', '$imageName')";
-            $result = mysqli_query($db, $query);
-
+            $image->save(IMAGES_DIR . $imageName);
+            $result = $property->save();
             if($result) {
                 // Redirect to admin
                 header('Location: /admin?result=1');
