@@ -110,4 +110,30 @@ class Property {
         return self::$errors;
     }
 
+    public static function all(){
+        $query = "SELECT * FROM properties";
+        $result = self::querySQL($query);
+        return $result;
+    }
+
+    public static function querySQL($query){
+        $result = self::$db->query($query);
+        $array = [];
+        while($register = $result->fetch_assoc()){
+            $array[] = self::createObject($register);
+        }
+        $result->free(); // Free the memory
+        return $array;
+    }
+
+    protected static function createObject($register){
+        $object = new self;
+        foreach($register as $key=>$value){
+            if(property_exists($object, $key)){
+                $object->$key = $value;
+            }
+        }
+        return $object;
+    }
+
 }
