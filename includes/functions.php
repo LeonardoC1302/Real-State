@@ -22,3 +22,9 @@ function debug($var) {
     echo '</pre>';
     exit;
 }
+
+// Sanitize data: Remove HTML tags and spaces
+function s($html){
+    $s = htmlspecialchars($html);
+    return $s;
+}
