@@ -62,21 +62,21 @@ use App\Property;
                 </tr>
             </thead>
             <tbody>
-                <?php while($property = mysqli_fetch_assoc($resultProperties)): ?>
+                <?php foreach( $properties as $property): ?>
                 <tr>
-                    <td> <?php echo $property['id']; ?> </td>
-                    <td> <?php echo $property['title']; ?> </td>
-                    <td><img src="/images/<?php echo $property['image']; ?> " alt="Table Image" class="table-image"></td>
-                    <td>$ <?php echo $property['price']; ?> </td>
+                    <td> <?php echo $property->id; ?> </td>
+                    <td> <?php echo $property->title; ?> </td>
+                    <td><img src="/images/<?php echo $property->image; ?> " alt="Table Image" class="table-image"></td>
+                    <td>$ <?php echo $property->price; ?> </td>
                     <td>
                         <form method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $property['id'] ?>">
+                            <input type="hidden" name="id" value="<?php echo $property->id ?>">
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
-                        <a href="/admin/properties/update.php?id=<?php echo $property['id']; ?>" class="yellow-button-block">Update</a>
+                        <a href="/admin/properties/update.php?id=<?php echo $property->id; ?>" class="yellow-button-block">Update</a>
                     </td>
                 </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
 
