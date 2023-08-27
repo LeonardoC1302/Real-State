@@ -1,14 +1,8 @@
 <?php
     // Check if user is logged in
-    require '../includes/functions.php';
-    $auth = isAuth();
-    if(!$auth) {
-        header('Location: /');
-    }
+    require '../includes/app.php';
+    isAuth();
 
-    // Import the connection
-    require '../includes/config/database.php';
-    $db = connect_db();
     // Write the query
     $query = "SELECT * FROM properties";
     // Run the query
