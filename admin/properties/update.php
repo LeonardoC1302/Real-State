@@ -1,9 +1,8 @@
 <?php
-    require '../../includes/functions.php';
-    $auth = isAuth();
-    if(!$auth) {
-        header('Location: /');
-    }
+    use App\Property;
+    require '../../includes/app.php';
+    isAuth();
+
     // Validate ID
     $id = $_GET['id'] ?? null;
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -11,13 +10,8 @@
         header('Location: /admin');
     }
 
-    require '../../includes/config/database.php';
-    $db = connect_db();
-
     // Get property
-    $query = "SELECT * FROM properties WHERE id = $id";
-    $result = mysqli_query($db, $query);
-    $property = mysqli_fetch_assoc($result);
+    $property = Property::find($id);
 
     //Get sellers
     $query = "SELECT * FROM sellers";
@@ -25,14 +19,6 @@
 
     // Form Validation
     $errors = [];
-    $title = $property['title'];
-    $price = $property['price'];
-    $description = $property['description'];
-    $rooms = $property['rooms'];
-    $wc = $property['wc'];
-    $parking = $property['parking'];
-    $seller_id = $property['seller_id'];
-    $image = $property['image'];
 
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -124,44 +110,7 @@
         <?php endforeach; ?>
 
         <form class="form" method="POST" enctype="multipart/form-data">
-            <fieldset>
-                <legend>General Information</legend>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" placeholder="Property Title" value="<?php echo $title ?>">
-
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" placeholder="Property Price" min=1 value="<?php echo $price ?>">
-
-                <label for="image">Image:</label>
-                <input type="file" id="image" name="image" accept="image/jpeg, image/png">
-
-                <img src="/images/<?php echo $image; ?>" class="image-small">
-
-                <label for="description">Description:</label>
-                <textarea id="description" name="description"><?php echo $description ?></textarea>
-            </fieldset>
-
-            <fieldset>
-                <legend>Property Information</legend>
-                <label for="rooms">Rooms:</label>
-                <input type="number" id="rooms" name="rooms" placeholder="Eg. 3" min=1 max=9 value="<?php echo $rooms ?>">
-
-                <label for="wc">Bathrooms:</label>
-                <input type="number" id="wc" name="wc" placeholder="Eg. 3" min=1 max=9 value="<?php echo $wc ?>">
-
-                <label for="parking">Parking:</label>
-                <input type="number" id="parking" name="parking" placeholder="Eg. 3" min=1 max=9 value="<?php echo $parking ?>">
-            </fieldset>
-
-            <fieldset>
-                <legend>Seller</legend>
-                <select name="seller">
-                    <option value="" disabled selected>-- Select a Seller --</option>
-                    <?php while( $seller = mysqli_fetch_assoc($result) ):?>
-                        <option <?php echo $seller_id === $seller['id'] ? 'selected' : ''; ?> value="<?php echo $seller['id']; ?>"><?php echo $seller['name'] . " " . $seller['lastName']; ?> </option>
-                    <?php endwhile; ?>
-                </select>
-            </fieldset>
+            <?php include '../../includes/templates/properties_form.php'; ?>
             <input type="submit" value="Update Property" class="button green-button">
         </form>
 

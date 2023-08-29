@@ -116,6 +116,12 @@ class Property {
         return $result;
     }
 
+    public static function find($id){
+        $query = "SELECT * FROM properties WHERE id = $id";
+        $result = self::querySQL($query);
+        return array_shift($result); // Get the first element of the array
+    }
+
     public static function querySQL($query){
         $result = self::$db->query($query);
         $array = [];
