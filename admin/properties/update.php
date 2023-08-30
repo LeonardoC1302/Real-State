@@ -1,5 +1,7 @@
 <?php
     use App\Property;
+    use Intervention\Image\ImageManagerStatic as Image;
+
     require '../../includes/app.php';
     isAuth();
 
@@ -18,7 +20,7 @@
     $result = mysqli_query($db, $query);
 
     // Form Validation
-    $errors = [];
+    $errors = Property::getErrors();
 
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,66 +40,24 @@
         $seller_id = mysqli_real_escape_string($db, $_POST['seller']);
         $created = date('Y/m/d');
 
-        // Files
-        $image = $_FILES['image'];
+        $errors = $property->validate();
+        
+        // Generate a unique name
+        $imageName = md5(uniqid(rand(), true)) . '.jpg';
 
-        if(!$title) {
-            $errors[] = "The title is mandatory";
-        }
-        if(!$price) {
-            $errors[] = "The price is mandatory";
-        }
-        if(strlen($description) < 25) {
-            $errors[] = "The description is mandatory and must be at least 25 characters";
-        }
-        if(!$rooms) {
-            $errors[] = "The room quantity is mandatory";
-        }
-        if(!$wc) {
-            $errors[] = "The bathroom quantity is mandatory";
-        }
-        if(!$parking) {
-            $errors[] = "The parking quantity is mandatory";
-        }
-        if(!$seller_id) {
-            $errors[] = "The seller is mandatory";
-        }
-
-        // Validate image size (200Kb max)
-        $maxSize = 1000 * 200;
-        if($image['size'] > $maxSize) {
-            $errors[] = "The image is too large. Max size: 100Kb";
+        if($_FILES['property']['tmp_name']['image']){
+            $image = Image::make($_FILES['property']['tmp_name']['image'])->fit(800, 600);
+            $property->setImage($imageName);
         }
 
         // Insert if there are no errors
         if(empty($errors)){
-            // Create folder
-            $imageDirectory = '../../images/';
-            if(!is_dir($imageDirectory)) {
-                mkdir($imageDirectory);
+            // Save image on disk
+            if($_FILES['property']['tmp_name']['image']){
+                // debug(IMAGES_DIR . $imageName);
+                $image->save(IMAGES_DIR . $imageName);
             }
-            
-            $imageName = '';
-            if($image['name']) {
-                // Delete previous image
-                unlink($imageDirectory . $property['image']);
-                // Generate a unique name
-                $imageName = md5(uniqid(rand(), true)) . '.jpg';
-                // Upload image
-                move_uploaded_file($image['tmp_name'], $imageDirectory . $imageName);
-            } else {
-                $imageName = $property['image'];
-            }
-
-            // Insert
-            $query = "UPDATE properties SET title='$title', price='$price', image='$imageName', description='$description', rooms=$rooms, wc=$wc, parking=$parking, seller_id='$seller_id' WHERE id = $id";
-
-            $result = mysqli_query($db, $query);
-
-            if($result) {
-                // Redirect to admin
-                header('Location: /admin?result=2');
-            }
+            $property->save();
         }
     }
 

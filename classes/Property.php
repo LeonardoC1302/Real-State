@@ -37,7 +37,15 @@ class Property {
         $this->image =  $args['image'] ?? '';
     }
 
-    public function save() {
+    public function save(){
+        if(isset($this->id)){
+            $this->update();
+        } else {
+            $this->create();
+        }
+    }
+
+    public function create() {
         // Sanitize inputs
         $attributes = $this->sanitizeData();
         // Insert data
@@ -49,6 +57,28 @@ class Property {
 
         $result = self::$db->query($query);
         return $result;
+    }
+
+    public function update(){
+        // Sanitize inputs
+        $attributes = $this->sanitizeData();
+
+        $values = [];
+        foreach ($attributes as $key=>$value) {
+            $values[] = "{$key}='{$value}'";
+        }
+
+        $query = "UPDATE properties SET ";
+        $query .= join(', ', $values);
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
+
+        $result = self::$db->query($query);
+
+        if($result) {
+            // Redirect to admin
+            header('Location: /admin?result=2');
+        }
     }
 
     // Identify all the attributes of the object
@@ -71,6 +101,14 @@ class Property {
     }
 
     public function setImage($image){
+        // Delete the previous image
+        if(isset($this->id)){
+            $fileExists = file_exists(IMAGES_DIR . $this->image);
+            if($fileExists){
+                unlink(IMAGES_DIR . $this->image);
+            }
+        }
+
         if($image){
             $this->image = $image;
         }
