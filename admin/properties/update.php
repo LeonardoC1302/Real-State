@@ -22,6 +22,12 @@
 
     // Execute after form is submitted
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Assign values
+        $args = $_POST['property'];
+        
+        // Update the current property
+        $property->sync($args);
+
         // Sanitize inputs
         $title = mysqli_real_escape_string($db, $_POST['title']);
         $price = mysqli_real_escape_string($db, $_POST['price']);

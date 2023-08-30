@@ -142,4 +142,13 @@ class Property {
         return $object;
     }
 
+    // Sync the object with the new values
+    public function sync($args = []){
+        foreach($args as $key=>$value){
+            if(property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
 }
