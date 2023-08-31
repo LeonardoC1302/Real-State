@@ -26,6 +26,7 @@ class Property {
     }
 
     public function __construct($args = []) {
+        $this->id =  $args['id'] ?? null; //The id or null
         $this->title =  $args['title'] ?? ''; //The title or an empty string
         $this->price =  $args['price'] ?? '';
         $this->description =  $args['description'] ?? '';
@@ -33,12 +34,12 @@ class Property {
         $this->wc =  $args['wc'] ?? '';
         $this->parking =  $args['parking'] ?? '';
         $this->created =  date('Y/m/d');
-        $this->seller_id =  $args['seller_id'] ?? '';
+        $this->seller_id =  $args['seller_id'] ?? '1';
         $this->image =  $args['image'] ?? '';
     }
 
     public function save(){
-        if(isset($this->id)){
+        if(!is_null($this->id)){
             $this->update();
         } else {
             $this->create();
@@ -46,7 +47,6 @@ class Property {
     }
 
     public function create() {
-        // Sanitize inputs
         $attributes = $this->sanitizeData();
         // Insert data
         $query = "INSERT INTO properties ( ";
@@ -54,9 +54,11 @@ class Property {
         $query .= ") VALUES (' ";
         $query .= join("', '", array_values($attributes));
         $query .= " ')";
-
         $result = self::$db->query($query);
-        return $result;
+        if($result) {
+            // Redirect to admin
+            header('Location: /admin?result=1');
+        }
     }
 
     public function update(){
@@ -74,10 +76,19 @@ class Property {
         $query .= " LIMIT 1";
 
         $result = self::$db->query($query);
-
         if($result) {
             // Redirect to admin
             header('Location: /admin?result=2');
+        }
+    }
+    // Delete a register
+    public function delete(){
+        $query = "DELETE FROM properties WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
+        $result = self::$db->query($query);
+        if($result) {
+            $this->deleteImage();
+            header('Location: /admin?result=3');
         }
     }
 
@@ -102,15 +113,19 @@ class Property {
 
     public function setImage($image){
         // Delete the previous image
-        if(isset($this->id)){
-            $fileExists = file_exists(IMAGES_DIR . $this->image);
-            if($fileExists){
-                unlink(IMAGES_DIR . $this->image);
-            }
+        if(!is_null($this->id)){
+            $this->deleteImage();
         }
 
         if($image){
             $this->image = $image;
+        }
+    }
+
+    public function deleteImage(){
+        $fileExists = file_exists(IMAGES_DIR . $this->image);
+        if($fileExists){
+            unlink(IMAGES_DIR . $this->image);
         }
     }
 

@@ -22,17 +22,8 @@ use App\Property;
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if($id) {
-            // Delete file
-            $query = "SELECT image FROM properties WHERE id = $id";
-            $result = mysqli_query($db, $query);
-            $property = mysqli_fetch_assoc($result);
-            unlink('../images/' . $property['image']);
-            // Delete the property from the database
-            $query = "DELETE FROM properties WHERE id = $id";
-            $result = mysqli_query($db, $query);
-            if($result) {
-                header('Location: /admin?result=3');
-            }
+            $property = Property::find($id);
+            $property->delete();
         }
     }
 

@@ -35,11 +35,7 @@
                 mkdir(IMAGES_DIR);
             }
             $image->save(IMAGES_DIR . $imageName);
-            $result = $property->save();
-            if($result) {
-                // Redirect to admin
-                header('Location: /admin?result=1');
-            }
+            $property->save();
         }
     }
 
