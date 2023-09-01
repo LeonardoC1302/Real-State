@@ -32,15 +32,15 @@
 <fieldset>
     <legend>Seller</legend>
 
-    <!-- <label for="seller">Seller:</label> -->
+    <!-- <label for="seller">Seller:</label> -->            
     <select name="property[seller_id]" id="seller">
         <option
-            <?php echo $property->sellerId == "" ? 'selected' : ''; ?>
+            <?php echo $property->seller_id == "" ? 'selected' : ''; ?>
             value="" disabled>-- Select a Seller --
         </option>
         <?php foreach($sellers as $seller) { ?>
-            <option 
-                <?php echo $property->sellerId === $seller->id ? 'selected' : ''; ?>
+            <option  
+                <?php echo $property->seller_id == $seller->id ? 'selected' : ''; ?>
                 value="<?php echo s($seller->id); ?>"> 
                 <?php echo s($seller->name) . " " . s($seller->lastName); ?>
             </option>

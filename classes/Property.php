@@ -29,4 +29,33 @@ class Property extends ActiveRecord{
         $this->seller_id =  $args['seller_id'] ?? '';
         $this->image =  $args['image'] ?? '';
     }
+
+    public function validate(){
+        if(!$this->title) {
+            self::$errors[] = "The title is mandatory";
+        }
+        if(!$this->price) {
+            self::$errors[] = "The price is mandatory";
+        }
+        if(strlen($this->description) < 25) {
+            self::$errors[] = "The description is mandatory and must be at least 25 characters";
+        }
+        if(!$this->rooms) {
+            self::$errors[] = "The room quantity is mandatory";
+        }
+        if(!$this->wc) {
+            self::$errors[] = "The bathroom quantity is mandatory";
+        }
+        if(!$this->parking) {
+            self::$errors[] = "The parking quantity is mandatory";
+        }
+        if(!$this->seller_id) {
+            self::$errors[] = "The seller is mandatory";
+        }
+        // Image validation
+        if(!$this->image){
+            self::$errors[] = "The image is mandatory";
+        }
+        return self::$errors;
+    }
 }

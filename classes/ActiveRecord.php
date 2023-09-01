@@ -72,7 +72,7 @@ class ActiveRecord {
     // Identify all the attributes of the object
     public function attributes(){
         $attributes = [];
-        foreach (self::$columns_db as $column) {
+        foreach (static::$columns_db as $column) {
             if($column === 'id')  continue; 
             $attributes[$column] = $this->$column;
         }
@@ -108,36 +108,12 @@ class ActiveRecord {
 
     // Validate the inputs
     public static function getErrors() {
-        return self::$errors;
+        return static::$errors;
     }
 
     public function validate(){
-        if(!$this->title) {
-            self::$errors[] = "The title is mandatory";
-        }
-        if(!$this->price) {
-            self::$errors[] = "The price is mandatory";
-        }
-        if(strlen($this->description) < 25) {
-            self::$errors[] = "The description is mandatory and must be at least 25 characters";
-        }
-        if(!$this->rooms) {
-            self::$errors[] = "The room quantity is mandatory";
-        }
-        if(!$this->wc) {
-            self::$errors[] = "The bathroom quantity is mandatory";
-        }
-        if(!$this->parking) {
-            self::$errors[] = "The parking quantity is mandatory";
-        }
-        if(!$this->seller_id) {
-            self::$errors[] = "The seller is mandatory";
-        }
-        // Image validation
-        if(!$this->image){
-            self::$errors[] = "The image is mandatory";
-        }
-        return self::$errors;
+        static::$errors = [];
+        return static::$errors;
     }
 
     public static function all(){
@@ -156,7 +132,7 @@ class ActiveRecord {
         $result = self::$db->query($query);
         $array = [];
         while($register = $result->fetch_assoc()){
-            $array[] = self::createObject($register);
+            $array[] = static::createObject($register);
         }
         $result->free(); // Free the memory
         return $array;

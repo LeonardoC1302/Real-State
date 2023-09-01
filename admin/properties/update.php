@@ -1,5 +1,6 @@
 <?php
     use App\Property;
+    use App\Seller;
     use Intervention\Image\ImageManagerStatic as Image;
 
     require '../../includes/app.php';
@@ -16,9 +17,8 @@
     $property = Property::find($id);
 
     //Get sellers
-    $query = "SELECT * FROM sellers";
-    $result = mysqli_query($db, $query);
-
+    $sellers = Seller::all();
+    
     // Form Validation
     $errors = Property::getErrors();
 
