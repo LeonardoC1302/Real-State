@@ -1,13 +1,15 @@
 <?php
     // Check if user is logged in
 
-use App\Property;
+    use App\Property;
+    use App\Seller;
 
     require '../includes/app.php';
     isAuth();
 
     // Obtain the properties from the database
     $properties =  Property::all();
+    $sellers = Seller::all();
 
     // Write the query
     $query = "SELECT * FROM properties";

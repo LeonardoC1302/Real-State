@@ -31,10 +31,19 @@
 
 <fieldset>
     <legend>Seller</legend>
-    <!-- <select name="seller_id">
-        <option value="" disabled selected>-- Select a Seller --</option>
-        <?php //while( $seller = mysqli_fetch_assoc($result) ):?>
-            <option <?php //echo $seller_id === $seller['id'] ? 'selected' : ''; ?> value="<?php //echo $seller['id']; ?>"><?php //echo $seller['name'] . " " . $seller['lastName']; ?> </option>
-        <?php //endwhile; ?>
-    </select> -->
+
+    <!-- <label for="seller">Seller:</label> -->
+    <select name="property[seller_id]" id="seller">
+        <option
+            <?php echo $property->sellerId == "" ? 'selected' : ''; ?>
+            value="" disabled>-- Select a Seller --
+        </option>
+        <?php foreach($sellers as $seller) { ?>
+            <option 
+                <?php echo $property->sellerId === $seller->id ? 'selected' : ''; ?>
+                value="<?php echo s($seller->id); ?>"> 
+                <?php echo s($seller->name) . " " . s($seller->lastName); ?>
+            </option>
+        <?php } ?>
+    </select>
 </fieldset>

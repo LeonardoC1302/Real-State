@@ -1,15 +1,15 @@
 <?php
     require '../../includes/app.php';
     use App\Property;
+    use App\Seller;
+
     use Intervention\Image\ImageManagerStatic as Image;
 
     isAuth();
-    $db = connect_db();
     $property = new Property;
 
     //Get sellers
-    $query = "SELECT * FROM sellers";
-    $result = mysqli_query($db, $query);
+    $sellers = Seller::all();
 
     // Form Validation
     $errors = Property::getErrors();
