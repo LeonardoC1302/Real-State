@@ -28,3 +28,9 @@ function s($html){
     $s = htmlspecialchars($html);
     return $s;
 }
+
+// Validate content type
+function validateContentType($type) {
+    $contentTypes = ['property', 'seller'];
+    return in_array($type, $contentTypes);
+}

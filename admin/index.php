@@ -23,9 +23,17 @@
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
-        if($id) {
-            $property = Property::find($id);
-            $property->delete();
+        if($id){
+            $type = $_POST['type'];
+            if(validateContentType($type)){
+                if($type === 'property'){
+                    $property = Property::find($id);
+                    $property->delete();
+                } else {
+                    $seller = Seller::find($id);
+                    $seller->delete();
+                }
+            }
         }
     }
 
@@ -43,6 +51,7 @@
         <?php endif;
         ?>
         <a href="/admin/properties/create.php" class="button green-button">New Property</a>
+        <a href="/admin/sellers/create.php" class="button yellow-button">New Seller</a>
 
         <h2>Properties</h2>
 
@@ -66,6 +75,7 @@
                     <td>
                         <form method="POST" class="w-100">
                             <input type="hidden" name="id" value="<?php echo $property->id ?>">
+                            <input type="hidden" name="type" value="property">
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
                         <a href="/admin/properties/update.php?id=<?php echo $property->id; ?>" class="yellow-button-block">Update</a>
@@ -93,7 +103,8 @@
                     <td> <?php echo $seller->phone; ?> </td>
                     <td>
                         <form method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $property->id ?>">
+                            <input type="hidden" name="id" value="<?php echo $seller->id ?>">
+                            <input type="hidden" name="type" value="seller">
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
                         <a href="/admin/sellers/update.php?id=<?php echo $property->id; ?>" class="yellow-button-block">Update</a>
