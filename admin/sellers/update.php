@@ -4,14 +4,23 @@
     use App\Seller;
     isAuth();
 
-    $seller = new Seller;
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    if(!$id) {
+        header('Location: /admin');
+    }
+
+    $seller = Seller::find($id);
     $errors = Seller::getErrors();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $seller = new Seller($_POST['seller']);
+        $args = $_POST['seller'];
+        $seller->sync($args);
         $errors = $seller->validate();
+
         if(empty($errors)){
-            $seller->save();
+            $result = $seller->save();
         }
     }
 
@@ -30,9 +39,13 @@ includeTemplate('header');
         </div>
     <?php endforeach; ?>
 
-    <form class="form" method="POST" action="/admin/sellers/update.php">
+    <form class="form" method="POST">
         <?php include '../../includes/templates/sellers_form.php'; ?>
-        <input type="submit" value="Update Seller" class="button green-button">
+        <input type="submit" value="Save Changes" class="button green-button">
     </form>
 
 </main>
+
+<?php
+    includeTemplate('footer');
+?>

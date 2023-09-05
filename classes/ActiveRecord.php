@@ -28,9 +28,9 @@ class ActiveRecord {
         // Insert data
         $query = "INSERT INTO " . static::$table . " ( ";
         $query .= join(', ', array_keys($attributes));
-        $query .= ") VALUES (' ";
+        $query .= ") VALUES ('";
         $query .= join("', '", array_values($attributes));
-        $query .= " ')";
+        $query .= "')";
         $result = self::$db->query($query);
         if($result) {
             // Redirect to admin

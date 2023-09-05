@@ -17,4 +17,22 @@ class Seller extends ActiveRecord{
         $this->lastName =  $args['lastName'] ?? '';
         $this->phone =  $args['phone'] ?? '';
     }
+
+    public function validate(){
+        if(!$this->name) {
+            self::$errors[] = "The name is mandatory";
+        }
+        if(!$this->lastName) {
+            self::$errors[] = "The last name is mandatory";
+        }
+        if(!$this->phone) {
+            self::$errors[] = "The phone is mandatory";
+        }
+
+        if($this->phone && !preg_match('/[0-9]{8}/', $this->phone)){
+            self::$errors[] = "The phone must be 8 digits";
+        }
+
+        return self::$errors;
+    }
 }

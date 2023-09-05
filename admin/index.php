@@ -43,11 +43,11 @@
     <main class="container section">
         <h1>Real State Administrator</h1>
         <?php if($result == 1): ?>
-            <p class='alert success'>Announcement Created Successfully</p>
+            <p class='alert success'>Created Successfully</p>
         <?php elseif($result == 2): ?>
-            <p class='alert success'>Announcement Updated Successfully</p>
+            <p class='alert success'>Updated Successfully</p>
         <?php elseif($result == 3): ?>
-            <p class='alert success'>Announcement Deleted Successfully</p>
+            <p class='alert success'>Deleted Successfully</p>
         <?php endif;
         ?>
         <a href="/admin/properties/create.php" class="button green-button">New Property</a>
@@ -107,7 +107,7 @@
                             <input type="hidden" name="type" value="seller">
                             <input type="submit" class="red-button-block" value="Delete">
                         </form>
-                        <a href="/admin/sellers/update.php?id=<?php echo $property->id; ?>" class="yellow-button-block">Update</a>
+                        <a href="/admin/sellers/update.php?id=<?php echo $seller->id; ?>" class="yellow-button-block">Update</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

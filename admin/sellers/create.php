@@ -36,3 +36,7 @@ includeTemplate('header');
     </form>
 
 </main>
+
+<?php
+    includeTemplate('footer');
+?>
