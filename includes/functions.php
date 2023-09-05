@@ -34,3 +34,23 @@ function validateContentType($type) {
     $contentTypes = ['property', 'seller'];
     return in_array($type, $contentTypes);
 }
+
+// Show notifications
+function showNotification($code){
+    switch($code){
+        case 1:
+            $message = 'Created Successfully';
+            break;
+        case 2:
+            $message = 'Updated Successfully';
+            break;
+        case 3:
+            $message = 'Deleted Successfully';
+            break;
+        default:
+            $message = False;
+            break;
+    }
+
+    return $message;
+}

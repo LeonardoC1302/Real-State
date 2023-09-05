@@ -42,14 +42,13 @@
 
     <main class="container section">
         <h1>Real State Administrator</h1>
-        <?php if($result == 1): ?>
-            <p class='alert success'>Created Successfully</p>
-        <?php elseif($result == 2): ?>
-            <p class='alert success'>Updated Successfully</p>
-        <?php elseif($result == 3): ?>
-            <p class='alert success'>Deleted Successfully</p>
-        <?php endif;
-        ?>
+        
+        <?php
+            $message = showNotification(intval($result));
+            if($message) { ?>
+                <p class='alert success'> <?php echo s($message) ?></p>";
+        <?php } ?>
+
         <a href="/admin/properties/create.php" class="button green-button">New Property</a>
         <a href="/admin/sellers/create.php" class="button yellow-button">New Seller</a>
 
