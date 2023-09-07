@@ -23,9 +23,6 @@
                 <label for="email">E-Mail</label>
                 <input type="email" placeholder="Your E-Mail" id="email">
 
-                <label for="name">Name</label>
-                <input type="text" placeholder="Your Name" id="name">
-
                 <label for="phone">Phone Number</label>
                 <input type="tel" placeholder="Your Phone Number" id="phone">
 

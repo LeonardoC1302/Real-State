@@ -13,7 +13,7 @@
             </div> <!-- .icon -->
             <div class="icon">
                 <img src="build/img/icono2.svg" alt="Price Icon" loading="lazy">
-                <h3>Precio</h3>
+                <h3>Price</h3>
                 <p>Sunt officia ea esse do tempor laboris ea in eu excepteur mollit pariatur. Mollit laborum laboris fugiat incididunt do veniam adipisicing. Nostrud consectetur aliqua non non ex.</p>
             </div> <!-- .icon -->
             <div class="icon">
